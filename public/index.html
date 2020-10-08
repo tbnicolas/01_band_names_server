@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket Server</title>
+</head>
+<body>
+    <h1> Acceso denegado </h1>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        var cliente = io();
+        cliente.on('connect',function(){
+            console.log('Conectado al servidor')
+        })
+        cliente.on('disconnect',function(){
+            console.log('Perdimos comunicacion con el servidor')
+        })
+        
+        /* cliente.emit('mensaje', {
+            nombre:'Nicolas',
+            edad:23
+        }) */
+
+        cliente.on('responseMesagge', (payload)=>{
+            console.log('Escuchando del server', payload)
+        })
+
+        cliente.on('nuevo mensaje',(payload)=>{
+           console.log('Flutter dice: ',payload);
+        })
+
+        cliente.on('active-bands',(payload)=>{
+            console.clear
+            console.table(payload);
+        })
+    </script>
+</body>
+</html>
